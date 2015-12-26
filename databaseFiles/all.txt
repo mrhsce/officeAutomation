@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [OfficeAutomation]    Script Date: 12/26/2015 4:17:18 PM ******/
+/****** Object:  Database [OfficeAutomation]    Script Date: 12/26/2015 10:11:29 PM ******/
 CREATE DATABASE [OfficeAutomation]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -75,7 +75,118 @@ ALTER DATABASE [OfficeAutomation] SET DELAYED_DURABILITY = DISABLED
 GO
 USE [OfficeAutomation]
 GO
-/****** Object:  UserDefinedFunction [dbo].[getStatement]    Script Date: 12/26/2015 4:17:18 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[getPersonalInfo]    Script Date: 12/26/2015 10:11:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE FUNCTION [dbo].[getPersonalInfo] 
+(
+	-- Add the parameters for the function here
+	@pId char(8)
+)
+RETURNS 
+@ansTable TABLE 
+(
+	-- Add the column definitions for the TABLE variable here
+	firstName varchar(20),
+	lastName varchar(20),
+	birthDate date,
+	sodoorPlace varchar(20),
+	maritalStatus char(1),
+	gender char(1),
+	childrenNumber tinyint,
+	nationalId char(10),
+	eduLevel varchar(50),
+	field varchar(50),
+	institute varchar(20),
+	graduationDate date,
+	finalProjectTitle varchar(20),
+	average float
+
+)
+AS
+BEGIN
+	-- Fill the table variable with the rows for your result set
+	with temp1 as(
+		select firstName,lastName,Birthdate,SodoorPlace,maritalStatus,Gender,ChildrenNumber,Person.NationalID
+		from Employee left join Person on Employee.NationalID=Person.NationalID
+		where Employee.PersonalID = @pId
+	)
+	, temp2 as(
+		select firstName,lastName,Birthdate,SodoorPlace,maritalStatus,Gender,ChildrenNumber,temp1.NationalID,EduLevel,Field,Institute,GraduationDate,FinalProjectTitle,Average
+		from temp1 left join Education on temp1.NationalID = Education.NationalID
+	)
+	insert into @ansTable
+	select * from temp2; 
+	RETURN 
+END
+
+GO
+/****** Object:  UserDefinedFunction [dbo].[getSalaries]    Script Date: 12/26/2015 10:11:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE FUNCTION [dbo].[getSalaries] 
+(
+	-- Add the parameters for the function here
+	@pId char(8)
+)
+RETURNS 
+@ansTalbe TABLE 
+(
+	-- Add the column definitions for the TABLE variable here
+	mScore int,
+	pScore int,
+	base int,
+	adding int,
+	additional int,
+	badClimate int,
+	hardness int,
+	familyScore int,
+	children int,
+	years int
+)
+AS
+BEGIN
+	-- Fill the table variable with the rows for your result set
+	with temp1 as
+	(
+		select EduLevel,PostID,ManagerID
+		from  Employee left join Education on Employee.NationalID = Education.NationalID
+		where Employee.PersonalID = @pId 
+	)
+	, temp2 as(
+		select EduLevel,Post_Score.Score pScore,ManagerID
+		from temp1 left join Post_Score on temp1.PostID = Post_Score.PostID
+	)
+	, temp3 as(
+		select EduLevel,pScore,Management_Score.Score mScore
+		from temp2 left join Management_Score on temp2.ManagerID = Management_Score.ID
+	),
+	temp4 as(
+		select mScore,pScore,Base base,Adding adding,Additional additional,BadClimate badClimate,Hardness hardness,FamilyScore familyScore,Children children,Years years
+		from temp3 left join Score on temp3.EduLevel = Score.EduLevel
+	)
+	Insert into @ansTalbe
+	select * from temp4;
+ 
+	RETURN 
+END
+
+GO
+/****** Object:  UserDefinedFunction [dbo].[getStatement]    Script Date: 12/26/2015 10:11:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -95,30 +206,30 @@ RETURNS
 @ansTable TABLE 
 (
 	firstName varchar(20),
-	familyName varchar(20),
-	Birthdate date,
-	SodoorPlace varchar(20),
+	lastName varchar(20),
+	irthDate date,
+	sodoorPlace varchar(20),
 	maritalStatus char(1),
-	Gender char(1),
-	ChildrenNumber tinyint,
-	PersonalID char(8),
-	NationalID char(10),
+	gender char(1),
+	childrenNumber tinyint,
+	personalId char(8),
+	nationalId char(10),
 	contractType varchar(20),
 	mScore int,
 	pScore int,
-	PostTitle varchar(20), 
-	OfficeTitle varchar(20),
-	ManagerID char(1),
-	EduLevel varchar(50),
-	Field varchar(50),
-	Base int,
-	Adding int,
-	Additional int,
-	BadClimate int,
-	Hardness int,
-	FamilyScore int,
-	Children int,
-	Years int
+	postTitle varchar(20), 
+	officeTitle varchar(20),
+	managerId char(1),
+	eduLevel varchar(50),
+	field varchar(50),
+	base int,
+	adding int,
+	additional int,
+	badClimate int,
+	hardness int,
+	familyScore int,
+	children int,
+	years int
 
 )
 AS
@@ -168,7 +279,7 @@ BEGIN
 END
 
 GO
-/****** Object:  UserDefinedFunction [dbo].[getUserInfo]    Script Date: 12/26/2015 4:17:18 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[getUserInfo]    Script Date: 12/26/2015 10:11:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -204,7 +315,7 @@ BEGIN
 END
 
 GO
-/****** Object:  Table [dbo].[Contract]    Script Date: 12/26/2015 4:17:18 PM ******/
+/****** Object:  Table [dbo].[Contract]    Script Date: 12/26/2015 10:11:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -228,7 +339,7 @@ CREATE TABLE [dbo].[Contract](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Education]    Script Date: 12/26/2015 4:17:18 PM ******/
+/****** Object:  Table [dbo].[Education]    Script Date: 12/26/2015 10:11:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -241,8 +352,8 @@ CREATE TABLE [dbo].[Education](
 	[Field] [varchar](50) NOT NULL,
 	[Institute] [varchar](20) NOT NULL,
 	[GraduationDate] [date] NOT NULL,
-	[Score] [decimal](5, 2) NOT NULL,
 	[FinalProjectTitle] [varchar](20) NOT NULL,
+	[Average] [float] NOT NULL,
  CONSTRAINT [PK_Education] PRIMARY KEY CLUSTERED 
 (
 	[NationalID] ASC
@@ -252,7 +363,7 @@ CREATE TABLE [dbo].[Education](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Employee]    Script Date: 12/26/2015 4:17:18 PM ******/
+/****** Object:  Table [dbo].[Employee]    Script Date: 12/26/2015 10:11:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -275,7 +386,7 @@ CREATE TABLE [dbo].[Employee](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Management_Score]    Script Date: 12/26/2015 4:17:18 PM ******/
+/****** Object:  Table [dbo].[Management_Score]    Script Date: 12/26/2015 10:11:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -295,7 +406,7 @@ CREATE TABLE [dbo].[Management_Score](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[OfficeUnit]    Script Date: 12/26/2015 4:17:18 PM ******/
+/****** Object:  Table [dbo].[OfficeUnit]    Script Date: 12/26/2015 10:11:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -314,7 +425,7 @@ CREATE TABLE [dbo].[OfficeUnit](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Person]    Script Date: 12/26/2015 4:17:18 PM ******/
+/****** Object:  Table [dbo].[Person]    Script Date: 12/26/2015 10:11:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -339,7 +450,7 @@ CREATE TABLE [dbo].[Person](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Post_Score]    Script Date: 12/26/2015 4:17:18 PM ******/
+/****** Object:  Table [dbo].[Post_Score]    Script Date: 12/26/2015 10:11:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -359,7 +470,7 @@ CREATE TABLE [dbo].[Post_Score](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Score]    Script Date: 12/26/2015 4:17:18 PM ******/
+/****** Object:  Table [dbo].[Score]    Script Date: 12/26/2015 10:11:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -385,7 +496,7 @@ CREATE TABLE [dbo].[Score](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[sysUser]    Script Date: 12/26/2015 4:17:18 PM ******/
+/****** Object:  Table [dbo].[sysUser]    Script Date: 12/26/2015 10:11:30 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
