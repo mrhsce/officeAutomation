@@ -8,13 +8,13 @@ if(!isset($_SESSION['login'])){
 else{
 	?>
 	<html>
-	<head t> 
+	<head >
 		<script type="application/javascript" src="js/jquery-2.1.4.js"></script>
     	<script type="application/javascript" src="js/main.js"></script>
 		<title>contractor employee main page</title>
 	</head>
 	<body>
-		<h3>welcome <?php if($_SESSION['gender'] == "m") echo "Mr " else echo "Ms";
+		<h3>welcome <?php if($_SESSION['gender'] == "M") echo "Mr "; else echo "Ms";
 		?> <?php echo $_SESSION['firstName']+" "+$_SESSION['lastName'] ?>;</h3>
 
 		<!-- Showing personal info -->
@@ -27,10 +27,11 @@ else{
 		<hr>
 
 		<button type="button" onclick="alert('login page should open')">Log out</button>	
-    </form>
-	</body>
-}
 
+	</body>
+	<?php
+}
+?>
 
 
 
