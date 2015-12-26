@@ -5,6 +5,10 @@
  * Date: 04/10/1394
  * Time: 9:06 PM
  */
+//dl('php_pdo_sqlsrv_55_ts.dll');
+
+
+// phpinfo();
 
 if(isset($_SESSION['login'])){
 
@@ -14,17 +18,33 @@ elseif(isset($_POST['username']) && isset($_POST['password'])){
     $p = $_POST['password'];
     exec("echo username and password are: $u --- $p >> debug.txt");
 
-    $server = 'MMDES';
+    $serverName = "MMDES"; //serverName\instanceName
 
-    // Connect to MSSQL
-    $link = mssql_connect($server);
+// Since UID and PWD are not specified in the $connectionInfo array,
+// The connection will be attempted using Windows Authentication.
+    $connectionInfo = array( "Database"=>"officeAutomation");
+    $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
-    if (!$link) {
-        die('Something went wrong while connecting to MSSQL');
+    if( $conn ) {
+        echo "Connection established.<br />";
+    }else{
+        echo "Connection could not be established.<br />";
+        die( print_r( sqlsrv_errors(), true));
     }
 
+    $query = "";
+    $query = 'select COUNT(*) as d from sysUser';
 
 
+    $result = sqlsrv_query( $conn , $query);
+
+    if (!$result)
+        die( print_r( sqlsrv_errors(), true));
+
+    while( $row = sqlsrv_fetch_array( $result))
+    {
+        echo $row['d'];
+    }
 
 }
 else{
