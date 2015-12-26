@@ -9,8 +9,8 @@ else{
 	?>
 	<html>
 	<head >
-		<script type="application/javascript" src="../js/jquery-2.1.4.js"></script>
-    	<script type="application/javascript" src="../js/main.js"></script>
+		<script type="application/javascript" src="js/jquery-2.1.4.js"></script>
+    	<script type="application/javascript" src="js/main.js"></script>
 		<title>contractor employee main page</title>
 	</head>
 	<body>
@@ -35,7 +35,7 @@ else{
 	<div class="show-statement" style="display: none;">
 		<span>Personal Id</span>
 		<span class="personalId"></span>
-		<table class="personalInfo">
+		<table class="personalInfo" style="border: 1px;">
 			<thead>
 			<tr>
 				<th>First Name</th>
@@ -100,7 +100,7 @@ else{
 				<th>Bad Climate</th>
 				<th>Hardness</th>
 				<th>Family Score</th>
-				<th>Children Number</th>
+				<th>Children</th>
 				<th>Years</th>
 			</tr>
 			</thead>
@@ -114,7 +114,7 @@ else{
 				<td class="badClimate"></td>
 				<td class="hardness"></td>
 				<td class="familyScore"></td>
-				<td class="childrenNumber"></td>
+				<td class="children"></td>
 				<td class="years"></td>
 			</tr>
 			</tbody>

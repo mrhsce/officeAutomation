@@ -10,7 +10,9 @@ if($conn){
     $query = "";
     $query = "SELECT *  FROM  getStatement('". $inputData['personalId']. "')";
     $result = sqlsrv_query( $conn , $query);
-    echo json_encode($result);
+    $row = sqlsrv_fetch_array($result);
+
+    echo json_encode($row);
 }
 else{
     echo json_encode('sqlConnectionError');
