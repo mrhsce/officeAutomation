@@ -121,6 +121,105 @@ else{
 		</table>
 	</div>
 
+	<div class="show-personalInfo" style="display: none;">
+		<span>Personal Information</span>
+		<span class="personalId"></span>
+		<table class="personalInfo" style="border: 1px;">
+			<thead>
+			<tr>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Birth Date</th>
+				<th>Sodoor Place</th>
+				<th>NationalId</th>
+				<th>Marital State</th>
+				<th>Gender</th>
+				<th>Children Number</th>				
+
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td class="firstName"></td>
+				<td class="lastName"></td>
+				<td class="birthDate"></td>
+				<td class="sodoorPlace"></td>
+				<td class="nationalId"></td>
+				<td class="maritalState"></td>
+				<td class="gender"></td>
+				<td class="childrenNumber"></td>
+				
+			</tr>
+			</tbody>
+		</table>
+
+		<hr>
+
+		<table class="educationInfo">
+			<thead>
+			<tr>
+				<th>Education Level</th>
+				<th>Filed</th>
+				<th>Institute</th>
+				<th>Graduation Date</th>
+				<th>Final Project Title</th>
+				<th>Average</th>
+
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td class="eduLevel"></td>
+				<td class="field"></td>
+				<td class="institute"></td>
+				<td class="graduationDate"></td>
+				<td class="finalProjectTitle"></td>
+				<td class="average"></td>
+			</tr>
+			</tbody>
+		</table>		
+	</div>
+
+
+	<div class="show-salary" style="display: none;">
+		<span>Salary Information</span>
+		<span class="personalId"></span>
+		
+		<table class="salaryInfo">
+			<thead>
+			<tr>
+				<th>Management Score</th>
+				<th>Post Score</th>
+				<th>Base</th>
+				<th>Adding</th>
+				<th>Additional</th>
+				<th>Bad Climate</th>
+				<th>Hardness</th>
+				<th>Family Score</th>
+				<th>Children</th>
+				<th>Years</th>
+				<th>Sum</th>
+
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td class="mScore"></td>
+				<td class="pScore"></td>
+				<td class="base"></td>
+				<td class="adding"></td>
+				<td class="additional"></td>
+				<td class="badClimate"></td>
+				<td class="hardness"></td>
+				<td class="familyScore"></td>
+				<td class="children"></td>
+				<td class="years"></td>
+				<td class="sum"></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
 	</body>
 	<?php
 }
