@@ -10,16 +10,26 @@ $(document).ready(function(){
 
     //statement
     $('button.show-statement').on('click',askForStatement);
+
+    //logout
+    $('button.logout').on('click',logout);
 });
 
-
+function logout(r){
+    var d={
+        task:'logout'
+    };
+    mainAjax(d,function(){
+        window.location.href="/index.php";
+    });
+}
 
 function askForStatement(){
     console.log('ask for the statement');
 
     var d={
         task:'statement',
-        personalId:'10101001'
+        personalId:'10101002'
     };
     mainAjax(d,showStatement);
 }
@@ -31,7 +41,7 @@ function showStatement(r){
     console.log('first name of statement'+ r['firstName']);
     console.log('last name of statement'+ r['lastName']);
 
-    $('div.show-statement span.personalId').html(r['PersonalID'])
+    $('div.show-statement span.personalId').html(r['PersonalID']);
     $('div.show-statement table.personalInfo td.firstName').html(r['firstName']);
     $('div.show-statement table.personalInfo td.lastName').html(r['familyName']);
     $('div.show-statement table.personalInfo td.birthDate').html(r['Birthdate']['date']);
@@ -91,8 +101,6 @@ function mainAjax(d,sFunc,ajaxUrl,eFunc,ajaxType,ajaxAsync){
         },
         success: function(response){
             response = JSON.parse(response);
-            console.log('response of ajax:');
-            console.log(response);
             sFunc(response);
 
         },
