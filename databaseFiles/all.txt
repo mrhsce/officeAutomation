@@ -1,0 +1,453 @@
+USE [master]
+GO
+/****** Object:  Database [OfficeAutomation]    Script Date: 12/26/2015 4:17:18 PM ******/
+CREATE DATABASE [OfficeAutomation]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'OfficeAutomation', FILENAME = N'D:\installed place\Microsoft SQL server 14\MSSQL12.MESSQLSERVER\MSSQL\DATA\OfficeAutomation.mdf' , SIZE = 5120KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'OfficeAutomation_log', FILENAME = N'D:\installed place\Microsoft SQL server 14\MSSQL12.MESSQLSERVER\MSSQL\DATA\OfficeAutomation_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
+ALTER DATABASE [OfficeAutomation] SET COMPATIBILITY_LEVEL = 120
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [OfficeAutomation].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [OfficeAutomation] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [OfficeAutomation] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [OfficeAutomation] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [OfficeAutomation] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [OfficeAutomation] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET RECOVERY FULL 
+GO
+ALTER DATABASE [OfficeAutomation] SET  MULTI_USER 
+GO
+ALTER DATABASE [OfficeAutomation] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [OfficeAutomation] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [OfficeAutomation] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [OfficeAutomation] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+GO
+ALTER DATABASE [OfficeAutomation] SET DELAYED_DURABILITY = DISABLED 
+GO
+USE [OfficeAutomation]
+GO
+/****** Object:  UserDefinedFunction [dbo].[getStatement]    Script Date: 12/26/2015 4:17:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Mohammad Eslahi Sani
+-- Create date: 1394-10-04
+-- Description:	to get statement of employees by their personalID
+-- =============================================
+CREATE FUNCTION [dbo].[getStatement] 
+(
+	-- Add the parameters for the function here
+	@emplyeeID char(8) 
+	
+)
+RETURNS 
+@ansTable TABLE 
+(
+	firstName varchar(20),
+	familyName varchar(20),
+	Birthdate date,
+	SodoorPlace varchar(20),
+	maritalStatus char(1),
+	Gender char(1),
+	ChildrenNumber tinyint,
+	PersonalID char(8),
+	NationalID char(10),
+	contractType varchar(20),
+	mScore int,
+	pScore int,
+	PostTitle varchar(20), 
+	OfficeTitle varchar(20),
+	ManagerID char(1),
+	EduLevel varchar(50),
+	Field varchar(50),
+	Base int,
+	Adding int,
+	Additional int,
+	BadClimate int,
+	Hardness int,
+	FamilyScore int,
+	Children int,
+	Years int
+
+)
+AS
+BEGIN
+	-- Fill the table variable with the rows for your result set
+	with temp1 as( 
+	select PersonalID,Employee.NationalID,ContractID,PostID,OfficeID,ManagerID,EduLevel,Field
+		from  Employee join Education on Employee.NationalID = Education.NationalID
+		where Employee.PersonalID = @emplyeeID 
+	)
+
+	,temp2 as( 
+	select PersonalID,NationalID,ContractID,PostID, OfficeUnit.OfficeTitle ,ManagerID,EduLevel,Field
+		from  temp1,OfficeUnit
+		where OfficeUnit.OfficeID = temp1.OfficeID 
+	)
+	,temp3 as( 
+	select PersonalID,NationalID,ContractID,Post_Score.PostTitle,Post_Score.Score, OfficeTitle ,ManagerID,EduLevel,Field
+		from  temp2 left join Post_Score on temp2.PostID = Post_Score.PostID
+	)
+
+	,temp4 as( 
+	select firstName,lastName,Birthdate,SodoorPlace,maritalStatus,Gender,ChildrenNumber,PersonalID,temp3.NationalID,ContractID,Score,PostTitle, OfficeTitle ,ManagerID,EduLevel,Field
+		from  temp3,Person
+		where temp3.NationalID = Person.NationalID 
+	)
+	,temp5 as( 
+	select firstName,lastName,Birthdate,SodoorPlace,maritalStatus,Gender,ChildrenNumber,PersonalID,NationalID,Contract.contractType,Score,PostTitle, OfficeTitle ,ManagerID,EduLevel,Field
+		from  temp4,Contract
+		where temp4.ContractID = Contract.ContractID 
+	)
+	,temp6 as( 
+	select firstName,lastName,Birthdate,SodoorPlace,maritalStatus,Gender,ChildrenNumber,PersonalID,NationalID,contractType,Score,PostTitle, OfficeTitle ,ManagerID,temp5.EduLevel,Field,Base,Adding,Additional,BadClimate,Hardness,FamilyScore,Children,Years
+		from  temp5,Score
+		where temp5.EduLevel = Score.EduLevel 
+	)
+	,temp7 as( 
+	select firstName,lastName,Birthdate,SodoorPlace,maritalStatus,Gender,ChildrenNumber,PersonalID,NationalID,contractType,Management_Score.Score mScore,temp6.Score pScore,PostTitle, OfficeTitle ,ManagerID,EduLevel,Field,Base,Adding,Additional,BadClimate,Hardness,FamilyScore,Children,Years
+		from  temp6 left join Management_Score on temp6.ManagerID = Management_Score.ID
+	)
+	Insert into @ansTable
+	select * from temp7;
+ 
+
+
+	RETURN 
+END
+
+GO
+/****** Object:  UserDefinedFunction [dbo].[getUserInfo]    Script Date: 12/26/2015 4:17:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE FUNCTION [dbo].[getUserInfo]
+(
+	-- Add the parameters for the function here
+	@inUser varchar(50)
+)
+RETURNS 
+@ansTable TABLE 
+(
+	-- Add the column definitions for the TABLE variable here
+	username varchar(50),
+	pass	varchar(50),
+	userType varchar(10),
+	pId char(8)
+)
+AS
+BEGIN
+	-- Fill the table variable with the rows for your result set
+	with temp1 as(
+		select * from sysUser where sysUser.Username = @inUser
+	)
+	Insert into @ansTable
+	select * from temp1;
+	RETURN 
+END
+
+GO
+/****** Object:  Table [dbo].[Contract]    Script Date: 12/26/2015 4:17:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Contract](
+	[ContractID] [char](10) NOT NULL,
+	[StartDate] [date] NOT NULL,
+	[ExpireDate] [date] NULL,
+	[Length] [int] NULL,
+	[PostID] [char](2) NULL,
+	[OfficeID] [char](2) NULL,
+	[contractType] [varchar](20) NOT NULL,
+ CONSTRAINT [PK_Contract] PRIMARY KEY CLUSTERED 
+(
+	[ContractID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Education]    Script Date: 12/26/2015 4:17:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Education](
+	[NationalID] [char](10) NOT NULL,
+	[EduLevel] [varchar](50) NOT NULL,
+	[Field] [varchar](50) NOT NULL,
+	[Institute] [varchar](20) NOT NULL,
+	[GraduationDate] [date] NOT NULL,
+	[Score] [decimal](5, 2) NOT NULL,
+	[FinalProjectTitle] [varchar](20) NOT NULL,
+ CONSTRAINT [PK_Education] PRIMARY KEY CLUSTERED 
+(
+	[NationalID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Employee]    Script Date: 12/26/2015 4:17:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Employee](
+	[PersonalID] [char](8) NOT NULL,
+	[NationalID] [char](10) NOT NULL,
+	[ContractID] [char](10) NOT NULL,
+	[PostID] [char](2) NULL,
+	[OfficeID] [char](2) NULL,
+	[ManagerID] [char](1) NULL,
+ CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED 
+(
+	[PersonalID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Management_Score]    Script Date: 12/26/2015 4:17:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Management_Score](
+	[ID] [char](1) NOT NULL,
+	[ManagementTitle] [varchar](20) NOT NULL,
+	[Score] [int] NOT NULL,
+ CONSTRAINT [PK_Management_Score] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[OfficeUnit]    Script Date: 12/26/2015 4:17:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[OfficeUnit](
+	[OfficeID] [char](2) NOT NULL,
+	[OfficeTitle] [varchar](20) NOT NULL,
+ CONSTRAINT [PK_OfficeUnit] PRIMARY KEY CLUSTERED 
+(
+	[OfficeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Person]    Script Date: 12/26/2015 4:17:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Person](
+	[firstName] [varchar](20) NOT NULL,
+	[lastName] [varchar](20) NOT NULL,
+	[Birthdate] [date] NOT NULL,
+	[NationalID] [char](10) NOT NULL,
+	[SodoorPlace] [varchar](15) NOT NULL,
+	[maritalStatus] [char](1) NOT NULL,
+	[Gender] [char](1) NOT NULL,
+	[ChildrenNumber] [tinyint] NOT NULL,
+ CONSTRAINT [PK_Person] PRIMARY KEY CLUSTERED 
+(
+	[NationalID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Post_Score]    Script Date: 12/26/2015 4:17:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Post_Score](
+	[PostID] [char](2) NOT NULL,
+	[PostTitle] [varchar](20) NOT NULL,
+	[Score] [int] NOT NULL,
+ CONSTRAINT [PK_Table_1] PRIMARY KEY CLUSTERED 
+(
+	[PostID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Score]    Script Date: 12/26/2015 4:17:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Score](
+	[EduLevel] [varchar](50) NOT NULL,
+	[Base] [int] NOT NULL,
+	[Additional] [int] NOT NULL,
+	[Adding] [int] NOT NULL,
+	[Hardness] [int] NOT NULL,
+	[BadClimate] [int] NOT NULL,
+	[FamilyScore] [int] NOT NULL,
+	[Children] [int] NOT NULL,
+	[Years] [int] NOT NULL,
+ CONSTRAINT [PK_Score_1] PRIMARY KEY CLUSTERED 
+(
+	[EduLevel] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[sysUser]    Script Date: 12/26/2015 4:17:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[sysUser](
+	[Username] [varchar](50) NOT NULL,
+	[Password] [varchar](50) NOT NULL,
+	[Role] [varchar](10) NOT NULL,
+	[PersonalID] [char](8) NOT NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+ALTER TABLE [dbo].[Contract]  WITH CHECK ADD  CONSTRAINT [FK_Contract_OfficeUnit] FOREIGN KEY([OfficeID])
+REFERENCES [dbo].[OfficeUnit] ([OfficeID])
+GO
+ALTER TABLE [dbo].[Contract] CHECK CONSTRAINT [FK_Contract_OfficeUnit]
+GO
+ALTER TABLE [dbo].[Contract]  WITH CHECK ADD  CONSTRAINT [FK_Contract_Post_Score] FOREIGN KEY([PostID])
+REFERENCES [dbo].[Post_Score] ([PostID])
+GO
+ALTER TABLE [dbo].[Contract] CHECK CONSTRAINT [FK_Contract_Post_Score]
+GO
+ALTER TABLE [dbo].[Education]  WITH CHECK ADD  CONSTRAINT [FK_Education_Person] FOREIGN KEY([NationalID])
+REFERENCES [dbo].[Person] ([NationalID])
+GO
+ALTER TABLE [dbo].[Education] CHECK CONSTRAINT [FK_Education_Person]
+GO
+ALTER TABLE [dbo].[Employee]  WITH CHECK ADD  CONSTRAINT [FK_Employee_Contract] FOREIGN KEY([ContractID])
+REFERENCES [dbo].[Contract] ([ContractID])
+GO
+ALTER TABLE [dbo].[Employee] CHECK CONSTRAINT [FK_Employee_Contract]
+GO
+ALTER TABLE [dbo].[Employee]  WITH CHECK ADD  CONSTRAINT [FK_Employee_Management_Score] FOREIGN KEY([ManagerID])
+REFERENCES [dbo].[Management_Score] ([ID])
+GO
+ALTER TABLE [dbo].[Employee] CHECK CONSTRAINT [FK_Employee_Management_Score]
+GO
+ALTER TABLE [dbo].[Employee]  WITH CHECK ADD  CONSTRAINT [FK_Employee_OfficeUnit] FOREIGN KEY([OfficeID])
+REFERENCES [dbo].[OfficeUnit] ([OfficeID])
+GO
+ALTER TABLE [dbo].[Employee] CHECK CONSTRAINT [FK_Employee_OfficeUnit]
+GO
+ALTER TABLE [dbo].[Employee]  WITH CHECK ADD  CONSTRAINT [FK_Employee_Person] FOREIGN KEY([NationalID])
+REFERENCES [dbo].[Person] ([NationalID])
+GO
+ALTER TABLE [dbo].[Employee] CHECK CONSTRAINT [FK_Employee_Person]
+GO
+ALTER TABLE [dbo].[Employee]  WITH CHECK ADD  CONSTRAINT [FK_Employee_Post_Score] FOREIGN KEY([PostID])
+REFERENCES [dbo].[Post_Score] ([PostID])
+GO
+ALTER TABLE [dbo].[Employee] CHECK CONSTRAINT [FK_Employee_Post_Score]
+GO
+ALTER TABLE [dbo].[sysUser]  WITH CHECK ADD  CONSTRAINT [FK_User_Employee] FOREIGN KEY([PersonalID])
+REFERENCES [dbo].[Employee] ([PersonalID])
+GO
+ALTER TABLE [dbo].[sysUser] CHECK CONSTRAINT [FK_User_Employee]
+GO
+USE [master]
+GO
+ALTER DATABASE [OfficeAutomation] SET  READ_WRITE 
+GO
