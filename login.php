@@ -11,7 +11,7 @@
 // phpinfo();
 
 if(isset($_SESSION['login'])){
-
+    echo '<br />login before';
 }
 elseif(isset($_POST['username']) && isset($_POST['password'])){
     $u = $_POST['username'];
@@ -32,8 +32,9 @@ elseif(isset($_POST['username']) && isset($_POST['password'])){
         die( print_r( sqlsrv_errors(), true));
     }
 
+
     $query = "";
-    $query = 'select COUNT(*) as d from sysUser';
+    $query = "SELECT *  FROM  sysUser  WHERE  Username='".$u . "'";
 
 
     $result = sqlsrv_query( $conn , $query);
@@ -41,9 +42,26 @@ elseif(isset($_POST['username']) && isset($_POST['password'])){
     if (!$result)
         die( print_r( sqlsrv_errors(), true));
 
-    while( $row = sqlsrv_fetch_array( $result))
-    {
-        echo $row['d'];
+    $row = sqlsrv_fetch_array($result);
+    if( $row['Password'] == $p ){
+        echo('login successfully');
+        $query2 = "SELECT firstName,lastName,Gender  FROM  Person JOIN Employee on Person.NationalID=Employee.NationalID  WHERE  PersonalID='".$row['PersonalID'] . "'";
+        $result2 = sqlsrv_query( $conn , $query2);
+
+        if (!$result2)
+            die( print_r( sqlsrv_errors(), true));
+
+        $row2 = sqlsrv_fetch_array($result2);
+//        print_r($row2);
+
+        $tempAry=array('username'=>$row['Username'],'role'=>$row['Role'],'personalId'=>$row['PersonalID'],
+            'firstName'=>$row2['firstName'],'lastName'=>$row2['lastName'],'gender'=>$row2['Gender']);
+        $_SESSION['login'] = $tempAry;
+
+//        print_r($_SESSION);
+    }
+    else{
+        echo('username or password is invalid');
     }
 
 }
