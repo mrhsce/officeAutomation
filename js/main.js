@@ -15,7 +15,7 @@ $(document).ready(function(){
 
 
 function askForStatement(){
-    alert('ask for the statement');
+    console.log('ask for the statement');
 
     var d={
         task:'statement',
@@ -28,28 +28,33 @@ function askForStatement(){
 function showStatement(r){
     $('div.show-statement').show();
     $('div.main').hide();
-    alert('showing the statement');
-    $('div.show-statement table.personalInfo td.firstName').innerHTML = r['firstName'];
-    $('div.show-statement table.personalInfo td.lastName').innerHTML = r['lastName'];
-    $('div.show-statement table.personalInfo td.birthDate').innerHTML = r['birthDate'];
-    $('div.show-statement table.personalInfo td.sodoorPlace').innerHTML = r['sodoorPlace'];
-    $('div.show-statement table.personalInfo td.nationalId').innerHTML = r['nationalId'];
-    $('div.show-statement table.personalInfo td.maritalState').innerHTML = r['maritalState'];
-    $('div.show-statement table.personalInfo td.gender').innerHTML = r['gender'];
-    $('div.show-statement table.personalInfo td.eduLevel').innerHTML = r['eduLevel'];
-    $('div.show-statement table.contractInfo td.contractType').innerHTML = r['contractType'];
-    $('div.show-statement table.contractInfo td.postTitle').innerHTML = r['postTitle'];
-    $('div.show-statement table.contractInfo td.managerId').innerHTML = r['managerId'];
-    $('div.show-statement table.salaryInfo td.mScore').innerHTML = r['mScore'];
-    $('div.show-statement table.salaryInfo td.pScore').innerHTML = r['pScore'];
-    $('div.show-statement table.salaryInfo td.base').innerHTML = r['base'];
-    $('div.show-statement table.salaryInfo td.adding').innerHTML = r['adding'];
-    $('div.show-statement table.salaryInfo td.additional').innerHTML = r['additional'];
-    $('div.show-statement table.salaryInfo td.badClimate').innerHTML = r['badClimate'];
-    $('div.show-statement table.salaryInfo td.hardness').innerHTML = r['hardness'];
-    $('div.show-statement table.salaryInfo td.familyScore').innerHTML = r['familyScore'];
-    $('div.show-statement table.salaryInfo td.childrenNumber').innerHTML = r['childrenNumber'];
-    $('div.show-statement table.salaryInfo td.years').innerHTML = r['years'];
+    console.log('first name of statement'+ r['firstName']);
+    console.log('last name of statement'+ r['lastName']);
+
+    $('div.show-statement span.personalId').html(r['PersonalID'])
+    $('div.show-statement table.personalInfo td.firstName').html(r['firstName']);
+    $('div.show-statement table.personalInfo td.lastName').html(r['familyName']);
+    $('div.show-statement table.personalInfo td.birthDate').html(r['Birthdate']['date']);
+    $('div.show-statement table.personalInfo td.sodoorPlace').html(r['SodoorPlace']);
+    $('div.show-statement table.personalInfo td.nationalId').html(r['NationalID']);
+    $('div.show-statement table.personalInfo td.maritalState').html(r['maritalStatus']);
+    $('div.show-statement table.personalInfo td.gender').html(r['Gender']);
+    $('div.show-statement table.personalInfo td.eduLevel').html(r['EduLevel']);
+    $('div.show-statement table.personalInfo td.ChildrenNumber').html(r['ChildrenNumber']);
+    $('div.show-statement table.contractInfo td.contractType').html(r['contractType']);
+    $('div.show-statement table.contractInfo td.postTitle').html(r['PostTitle']);
+    $('div.show-statement table.contractInfo td.OfficeTitle').html(r['OfficeTitle']);
+    $('div.show-statement table.contractInfo td.managerId').html(r['ManagerID']);
+    $('div.show-statement table.salaryInfo td.mScore').html(r['mScore']);
+    $('div.show-statement table.salaryInfo td.pScore').html(r['pScore']);
+    $('div.show-statement table.salaryInfo td.base').html(r['Base']);
+    $('div.show-statement table.salaryInfo td.adding').html(r['Adding']);
+    $('div.show-statement table.salaryInfo td.additional').html(r['Additional']);
+    $('div.show-statement table.salaryInfo td.badClimate').html(r['BadClimate']);
+    $('div.show-statement table.salaryInfo td.hardness').html(r['Hardness']);
+    $('div.show-statement table.salaryInfo td.familyScore').html(r['FamilyScore']);
+    $('div.show-statement table.salaryInfo td.children').html(r['Children']);
+    $('div.show-statement table.salaryInfo td.years').html(r['Years']);
 }
 
 function submit(){
@@ -86,6 +91,8 @@ function mainAjax(d,sFunc,ajaxUrl,eFunc,ajaxType,ajaxAsync){
         },
         success: function(response){
             response = JSON.parse(response);
+            console.log('response of ajax:');
+            console.log(response);
             sFunc(response);
 
         },
