@@ -14,8 +14,8 @@ else{
 		<title>contractor employee main page</title>
 	</head>
 	<body>
-		<h3>welcome <?php if($_SESSION['gender'] == "M") echo "Mr "; else echo "Ms";
-		?> <?php echo $_SESSION['firstName']+" "+$_SESSION['lastName'] ?>;</h3>
+		<h3>welcome <?php if($_SESSION['login']['gender'] == "M") echo "Mr "; else echo "Ms";
+		?> <?php echo "".$_SESSION['login']['firstName']." ".$_SESSION['login']['lastName'] ?>;</h3>
 
 		<!-- Showing personal info -->
 		<button type="button" onclick="alert('page1 should open')">Show personal info</button>
