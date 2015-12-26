@@ -9,7 +9,19 @@ $(document).ready(function(){
 
 
     //statement
-    $('button.show-statement').on('click',askForStatement);
+    $('button.show-statement').on('click',function(){
+        askForStatement);
+    });
+
+    //personalInfo
+    $('button.show-personalInfo').on('click',function(){
+        askForPersonalInfo();
+    });
+
+    //showSalaries
+    $('button.show-salaries').on('click',function(){
+        askForSalaries);
+    });
 
     //logout
     $('button.logout').on('click',logout);
@@ -25,7 +37,7 @@ function logout(r){
 }
 
 function askForStatement(){
-    console.log('ask for the statement');
+    console.log('asking for the statement');
 
     var d={
         task:'statement',
@@ -34,6 +46,33 @@ function askForStatement(){
     mainAjax(d,showStatement);
 }
 
+function askForPersonalInfo(){
+    console.log('asking for personal information')
+
+    var d={
+        task:'personalId',
+        personalId:'10101002'
+    };
+    mainAjax(d,showPersonalInfo);
+}
+
+function askForSalaries(){
+    console.log('asking for salary information')
+
+    var d={
+        task:'salaries',
+        personalId:'10101002'
+    };
+    mainAjax(d,showSalaries);
+}
+
+function showSalaries(r){
+    //TODO complete show salaries
+}
+
+function showPersonalInfo(r){
+    //TODO complete show personalInfo
+}
 
 function showStatement(r){
     $('div.show-statement').show();
