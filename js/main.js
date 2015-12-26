@@ -110,15 +110,16 @@ function showPersonalInfo(r){
 function showStatement(r){
     $('div.show-statement').show();
     $('div.main').hide();
+    //console.log(r);
     console.log('first name of statement'+ r['firstName']);
     console.log('last name of statement'+ r['lastName']);
 
     $('div.show-statement span.personalId').html(r['PersonalID']);
     $('div.show-statement table.personalInfo td.firstName').html(r['firstName']);
     $('div.show-statement table.personalInfo td.lastName').html(r['lastName']);
-    $('div.show-statement table.personalInfo td.birthDate').html(r['birthdate']['date']);
+    $('div.show-statement table.personalInfo td.birthDate').html(r['birthDate']['date']);
     $('div.show-statement table.personalInfo td.sodoorPlace').html(r['sodoorPlace']);
-    $('div.show-statement table.personalInfo td.nationalId').html(r['nationalID']);
+    $('div.show-statement table.personalInfo td.nationalId').html(r['nationalId']);
     $('div.show-statement table.personalInfo td.maritalState').html(r['maritalStatus']);
     $('div.show-statement table.personalInfo td.gender').html(r['gender']);
     $('div.show-statement table.personalInfo td.eduLevel').html(r['eduLevel']);
@@ -126,7 +127,7 @@ function showStatement(r){
     $('div.show-statement table.contractInfo td.contractType').html(r['contractType']);
     $('div.show-statement table.contractInfo td.postTitle').html(r['postTitle']);
     $('div.show-statement table.contractInfo td.OfficeTitle').html(r['officeTitle']);
-    $('div.show-statement table.contractInfo td.managerId').html(r['managerID']);
+    $('div.show-statement table.contractInfo td.managerId').html(r['managerId']);
     $('div.show-statement table.salaryInfo td.mScore').html(r['mScore']);
     $('div.show-statement table.salaryInfo td.pScore').html(r['pScore']);
     $('div.show-statement table.salaryInfo td.base').html(r['base']);

@@ -57,7 +57,7 @@ else{
 				<td class="birthDate"></td>
 				<td class="sodoorPlace"></td>
 				<td class="nationalId"></td>
-				<td class="maritalState"></td>
+				<td class="maritalStatus"></td>
 				<td class="gender"></td>
 				<td class="childrenNumber"></td>
 				<td class="eduLevel"></td>
