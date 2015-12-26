@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [OfficeAutomation]    Script Date: 12/26/2015 10:11:29 PM ******/
+/****** Object:  Database [OfficeAutomation]    Script Date: 12/26/2015 11:28:20 PM ******/
 CREATE DATABASE [OfficeAutomation]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -75,7 +75,7 @@ ALTER DATABASE [OfficeAutomation] SET DELAYED_DURABILITY = DISABLED
 GO
 USE [OfficeAutomation]
 GO
-/****** Object:  UserDefinedFunction [dbo].[getPersonalInfo]    Script Date: 12/26/2015 10:11:30 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[getPersonalInfo]    Script Date: 12/26/2015 11:28:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -128,7 +128,7 @@ BEGIN
 END
 
 GO
-/****** Object:  UserDefinedFunction [dbo].[getSalaries]    Script Date: 12/26/2015 10:11:30 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[getSalaries]    Script Date: 12/26/2015 11:28:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -186,7 +186,7 @@ BEGIN
 END
 
 GO
-/****** Object:  UserDefinedFunction [dbo].[getStatement]    Script Date: 12/26/2015 10:11:30 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[getStatement]    Script Date: 12/26/2015 11:28:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -207,7 +207,7 @@ RETURNS
 (
 	firstName varchar(20),
 	lastName varchar(20),
-	irthDate date,
+	birthDate date,
 	sodoorPlace varchar(20),
 	maritalStatus char(1),
 	gender char(1),
@@ -279,7 +279,7 @@ BEGIN
 END
 
 GO
-/****** Object:  UserDefinedFunction [dbo].[getUserInfo]    Script Date: 12/26/2015 10:11:30 PM ******/
+/****** Object:  UserDefinedFunction [dbo].[getUserInfo]    Script Date: 12/26/2015 11:28:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -315,7 +315,7 @@ BEGIN
 END
 
 GO
-/****** Object:  Table [dbo].[Contract]    Script Date: 12/26/2015 10:11:30 PM ******/
+/****** Object:  Table [dbo].[Contract]    Script Date: 12/26/2015 11:28:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -339,7 +339,7 @@ CREATE TABLE [dbo].[Contract](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Education]    Script Date: 12/26/2015 10:11:30 PM ******/
+/****** Object:  Table [dbo].[Education]    Script Date: 12/26/2015 11:28:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -363,7 +363,7 @@ CREATE TABLE [dbo].[Education](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Employee]    Script Date: 12/26/2015 10:11:30 PM ******/
+/****** Object:  Table [dbo].[Employee]    Script Date: 12/26/2015 11:28:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -386,7 +386,7 @@ CREATE TABLE [dbo].[Employee](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Management_Score]    Script Date: 12/26/2015 10:11:30 PM ******/
+/****** Object:  Table [dbo].[Management_Score]    Script Date: 12/26/2015 11:28:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -406,7 +406,7 @@ CREATE TABLE [dbo].[Management_Score](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[OfficeUnit]    Script Date: 12/26/2015 10:11:30 PM ******/
+/****** Object:  Table [dbo].[OfficeUnit]    Script Date: 12/26/2015 11:28:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -425,7 +425,7 @@ CREATE TABLE [dbo].[OfficeUnit](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Person]    Script Date: 12/26/2015 10:11:30 PM ******/
+/****** Object:  Table [dbo].[Person]    Script Date: 12/26/2015 11:28:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -450,7 +450,7 @@ CREATE TABLE [dbo].[Person](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Post_Score]    Script Date: 12/26/2015 10:11:30 PM ******/
+/****** Object:  Table [dbo].[Post_Score]    Script Date: 12/26/2015 11:28:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -470,7 +470,7 @@ CREATE TABLE [dbo].[Post_Score](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Score]    Script Date: 12/26/2015 10:11:30 PM ******/
+/****** Object:  Table [dbo].[Score]    Script Date: 12/26/2015 11:28:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -496,7 +496,7 @@ CREATE TABLE [dbo].[Score](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[sysUser]    Script Date: 12/26/2015 10:11:30 PM ******/
+/****** Object:  Table [dbo].[sysUser]    Script Date: 12/26/2015 11:28:20 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
