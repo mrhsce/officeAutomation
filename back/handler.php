@@ -15,8 +15,8 @@ switch($inputData['task']){
     case 'statement':
         include_once 'statement.php';
         break;
-    case 'personalId':
-        include_once 'personalId.php';
+    case 'personalInfo':
+        include_once 'personalInfo.php';
         break;
     case 'salaries':
         include_once 'salaries.php';

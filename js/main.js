@@ -10,7 +10,7 @@ $(document).ready(function(){
 
     //statement
     $('button.show-statement').on('click',function(){
-        askForStatement);
+        askForStatement();
     });
 
     //personalInfo
@@ -20,7 +20,7 @@ $(document).ready(function(){
 
     //showSalaries
     $('button.show-salaries').on('click',function(){
-        askForSalaries);
+        askForSalaries();
     });
 
     //logout
@@ -47,17 +47,17 @@ function askForStatement(){
 }
 
 function askForPersonalInfo(){
-    console.log('asking for personal information')
+    console.log('asking for personal information');
 
     var d={
-        task:'personalId',
+        task:'personalInfo',
         personalId:'10101002'
     };
     mainAjax(d,showPersonalInfo);
 }
 
 function askForSalaries(){
-    console.log('asking for salary information')
+    console.log('asking for salary information');
 
     var d={
         task:'salaries',
@@ -67,36 +67,44 @@ function askForSalaries(){
 }
 
 function showSalaries(r){
-    $('div.show-statement table.salaryInfo td.mScore').html(r['mScore']);
-    $('div.show-statement table.salaryInfo td.pScore').html(r['pScore']);
-    $('div.show-statement table.salaryInfo td.base').html(r['base']);
-    $('div.show-statement table.salaryInfo td.adding').html(r['adding']);
-    $('div.show-statement table.salaryInfo td.additional').html(r['additional']);
-    $('div.show-statement table.salaryInfo td.badClimate').html(r['badClimate']);
-    $('div.show-statement table.salaryInfo td.hardness').html(r['hardness']);
-    $('div.show-statement table.salaryInfo td.familyScore').html(r['familyScore']);
-    $('div.show-statement table.salaryInfo td.children').html(r['children']);
-    $('div.show-statement table.salaryInfo td.years').html(r['years']);
-    $('div.show-statement table.salaryInfo td.sum').html(r['sum']);
+    $('div.show-salary').show();
+    $('div.main').hide();
+
+
+    $('div.show-salary table.salaryInfo td.mScore').html(r['mScore']);
+    $('div.show-salary table.salaryInfo td.pScore').html(r['pScore']);
+    $('div.show-salary table.salaryInfo td.base').html(r['base']);
+    $('div.show-salary table.salaryInfo td.adding').html(r['adding']);
+    $('div.show-salary table.salaryInfo td.additional').html(r['additional']);
+    $('div.show-salary table.salaryInfo td.badClimate').html(r['badClimate']);
+    $('div.show-salary table.salaryInfo td.hardness').html(r['hardness']);
+    $('div.show-salary table.salaryInfo td.familyScore').html(r['familyScore']);
+    $('div.show-salary table.salaryInfo td.children').html(r['children']);
+    $('div.show-salary table.salaryInfo td.years').html(r['years']);
+    $('div.show-salary table.salaryInfo td.sum').html(r['sum']);
 }
 
 function showPersonalInfo(r){
-    $('div.show-statement span.personalId').html(r['personalID']);
-    $('div.show-statement table.personalInfo td.firstName').html(r['firstName']);
-    $('div.show-statement table.personalInfo td.lastName').html(r['lastName']);
-    $('div.show-statement table.personalInfo td.birthDate').html(r['birthdate']['date']);
-    $('div.show-statement table.personalInfo td.sodoorPlace').html(r['sodoorPlace']);
-    $('div.show-statement table.personalInfo td.nationalId').html(r['nationalID']);
-    $('div.show-statement table.personalInfo td.maritalState').html(r['maritalStatus']);
-    $('div.show-statement table.personalInfo td.gender').html(r['gender']);    
-    $('div.show-statement table.personalInfo td.ChildrenNumber').html(r['childrenNumber']);
+    $('div.show-personalInfo').show();
+    $('div.main').hide();
+    console.log(r);
 
-    $('div.show-statement table.educationInfo td.eduLevel').html(r['eduLevel']);
-    $('div.show-statement table.educationInfo td.field').html(r['field']);
-    $('div.show-statement table.educationInfo td.institute').html(r['institute']);
-    $('div.show-statement table.educationInfo td.graduationDate').html(r['graduationDate']);
-    $('div.show-statement table.educationInfo td.finalProjectTitle').html(r['finalProjectTitle']);
-    $('div.show-statement table.educationInfo td.average').html(r['average']);
+    $('div.show-personalInfo span.personalId').html(r['personalID']);
+    $('div.show-personalInfo table.personalInfo td.firstName').html(r['firstName']);
+    $('div.show-personalInfo table.personalInfo td.lastName').html(r['lastName']);
+    $('div.show-personalInfo table.personalInfo td.birthDate').html(r['birthDate']['date']);
+    $('div.show-personalInfo table.personalInfo td.sodoorPlace').html(r['sodoorPlace']);
+    $('div.show-personalInfo table.personalInfo td.nationalId').html(r['nationalId']);
+    $('div.show-personalInfo table.personalInfo td.maritalStatus').html(r['maritalStatus']);
+    $('div.show-personalInfo table.personalInfo td.gender').html(r['gender']);
+    $('div.show-personalInfo table.personalInfo td.childrenNumber').html(r['childrenNumber']);
+
+    $('div.show-personalInfo table.educationInfo td.eduLevel').html(r['eduLevel']);
+    $('div.show-personalInfo table.educationInfo td.field').html(r['field']);
+    $('div.show-personalInfo table.educationInfo td.institute').html(r['institute']);
+    $('div.show-personalInfo table.educationInfo td.graduationDate').html(r['graduationDate']['date']);
+    $('div.show-personalInfo table.educationInfo td.finalProjectTitle').html(r['finalProjectTitle']);
+    $('div.show-personalInfo table.educationInfo td.average').html(r['average']);
 }
 
 function showStatement(r){

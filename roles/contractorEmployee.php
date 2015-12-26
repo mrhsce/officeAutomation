@@ -19,11 +19,11 @@ else{
 			?> <?php echo "".$_SESSION['login']['firstName']." ".$_SESSION['login']['lastName'] ?>;</h3>
 
 		<!-- Showing personal info -->
-		<button class="show-info" type="button" >Show personal info</button>
+		<button class="show-personalInfo" type="button" >Show personal info</button>
 		<!-- Showing statement -->
 		<button class="show-statement" type="button" >Show the statement</button>
 		<!-- Showing salaries -->
-		<button class="show-salary" type="button" >Show salaries</button>
+		<button class="show-salaries" type="button" >Show salaries</button>
 
 		<hr>
 
@@ -145,7 +145,7 @@ else{
 				<td class="birthDate"></td>
 				<td class="sodoorPlace"></td>
 				<td class="nationalId"></td>
-				<td class="maritalState"></td>
+				<td class="maritalStatus"></td>
 				<td class="gender"></td>
 				<td class="childrenNumber"></td>
 				
