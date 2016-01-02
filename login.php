@@ -11,12 +11,12 @@
 // phpinfo();
 
 if(isset($_SESSION['login'])){
-    echo '<br />login before';
+
 }
 elseif(isset($_POST['username']) && isset($_POST['password'])){
     $u = $_POST['username'];
     $p = $_POST['password'];
-    exec("echo username and password are: $u --- $p >> debug.txt");
+//    exec("echo username and password are: $u --- $p >> debug.txt");
 
     $serverName = "MMDES"; //serverName\instanceName
 
@@ -26,10 +26,12 @@ elseif(isset($_POST['username']) && isset($_POST['password'])){
     $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
     if( $conn ) {
-        echo "Connection established.<br />";
+//        echo "Connection established.<br />";
     }else{
-        echo "Connection could not be established.<br />";
-        die( print_r( sqlsrv_errors(), true));
+//        echo "Connection could not be established.<br />";
+//        die( print_r( sqlsrv_errors(), true));
+        exec("echo connection was not established >> debug.txt");
+
     }
 
 
@@ -44,7 +46,6 @@ elseif(isset($_POST['username']) && isset($_POST['password'])){
 
     $row = sqlsrv_fetch_array($result);
     if( $row['Password'] == $p ){
-        echo('login successfully');
         $query2 = "SELECT firstName,lastName,Gender  FROM  Person JOIN Employee on Person.NationalID=Employee.NationalID  WHERE  PersonalID='".$row['PersonalID'] . "'";
         $result2 = sqlsrv_query( $conn , $query2);
 
@@ -61,28 +62,71 @@ elseif(isset($_POST['username']) && isset($_POST['password'])){
 //        print_r($_SESSION);
     }
     else{
-        echo('username or password is invalid');
+        header('location: ?invalid');
+        die();
     }
 
+}
+elseif (isset($_GET['invalid'])){
+    ?>
+    <html>
+
+    <head>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
+
+        <script type="application/javascript" src="js/jquery-2.1.4.js"></script>
+        <script type="application/javascript" src="js/main.js"></script>
+    </head>
+    <body>
+
+    <div class="container sign-in-container">
+        <p class="invalid-text">Invalid username or password,<br> Try again!</p>
+
+        <form method="post" class="form-signin login-form">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <label  for="inputEmail" class="sr-only">Username</label>
+            <input name="username" type="text" id="inputEmail" class="username-input form-control" placeholder="Username" required autofocus>
+            <label for="inputPassword" class="password-input sr-only">Password</label>
+            <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <button class="submit-button btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+
+    </div> <!-- /container -->
+
+
+    </body>
+    </html>
+    <?php
 }
 else{
 ?>
 <html>
 
 <head>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+
     <script type="application/javascript" src="js/jquery-2.1.4.js"></script>
     <script type="application/javascript" src="js/main.js"></script>
 </head>
 <body>
-    <form method="post" class="login-form">
-        <label>Username</label>
-        <input type="text" name="username" class="username-input"><br />
 
-        <label>Password</label>
-        <input type="password" name="password" class="password-input"><br />
+    <div class="container sign-in-container">
 
-        <button type="submit" class="submit-button">Login</button>
-    </form>
+        <form method="post" class="form-signin login-form">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <label  for="inputEmail" class="sr-only">Username</label>
+            <input name="username" type="text" id="inputEmail" class="username-input form-control" placeholder="Username" required autofocus>
+            <label for="inputPassword" class="password-input sr-only">Password</label>
+            <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+            <button class="submit-button btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+
+    </div> <!-- /container -->
+
+
 </body>
 </html>
 <?php } ?>
