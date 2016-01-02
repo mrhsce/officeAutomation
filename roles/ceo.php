@@ -55,12 +55,51 @@ else{
     <!-- Showing basic tables -->
     <button class="show-basicTables" type="button" >Show Basic tables</button>
 <?php } else{ ?>
-    <!-- Showing personal info -->
-    <button class="show-personalInfo" type="button" >Show personal info</button>
-    <!-- Showing statement -->
-    <button class="show-statement" type="button" >Show the statement</button>
-    <!-- Showing salaries -->
-    <button class="show-salaries" type="button" >Show salaries</button>
+
+    <div class="container ceo-home-main">
+        <div class="container info-brief">
+            <div class="row">
+                Name: <?php echo $_SESSION['login']['firstName'] ?>
+            </div>
+            <div class="row">
+                Last Name: <?php echo $_SESSION['login']['lastName'] ?>
+            </div>
+            <div class="row">
+                Gender: <?php if($_SESSION['login']['gender']=='M') echo 'Male'; else echo "Female" ;?>
+            </div>
+            <div class="row">
+                <!-- Showing personal info -->
+                <button class="show-personalInfo" type="button" >Show personal info</button>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="container contract-brief">
+            <div class="row pid">
+                PersonalId: <?php echo $_SESSION['login']['personalId'] ?>
+            </div>
+            <div class="row sum-salary">
+                Salary:
+            </div>
+            <div class="row">
+                <!-- Showing salaries -->
+                <button class="show-salaries" type="button" >Show salaries</button>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="container statement-brief">
+            <div class="row">
+                <!-- Showing statement -->
+                <button class="show-statement" type="button" >Show the statement</button>
+            </div>
+        </div>
+
+    </div>
+
 <?php } ?>
 
 

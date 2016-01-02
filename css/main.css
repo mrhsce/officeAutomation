@@ -6,3 +6,19 @@ div.sign-in-container{
 div.sign-in-container p.invalid-text{
     color:red;
 }
+
+
+
+
+div.ceo-home-main{
+    text-align: center;
+    max-width: 20em;
+    border: 2px solid lavender;
+    padding: 3em;
+    background: aliceblue;
+    border-radius: 2em;
+}
+
+div.ceo-home-main div{
+    width:initial;
+}
