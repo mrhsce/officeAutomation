@@ -1,0 +1,8 @@
+div.sign-in-container{
+    max-width: 20em;
+    margin-top: 5em;
+}
+
+div.sign-in-container p.invalid-text{
+    color:red;
+}
