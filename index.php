@@ -6,12 +6,12 @@
  * Date: 04/10/1394
  * Time: 8:57 PM
  */
-//echo'session is:';
+ini_set('display_errors','Off');
 session_start();
 //print_r($_SESSION);
 include_once 'login.php';
 //print_r(session_save_path());
-ini_set();
+//ini_set();
 if($_SESSION['login']){
     switch($_SESSION['login']['role']){
         case 'contEmp':
