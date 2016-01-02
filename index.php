@@ -24,7 +24,7 @@ if($_SESSION['login']){
         	include_once 'roles/ceo.php';
         	break;
         case 'director':
-        	include_once 'roles/director.php';
+        	include_once 'roles/manager.php';
         	break;
         case 'humanRes':
         	include_once 'roles/humanResource.php';

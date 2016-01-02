@@ -36,14 +36,113 @@ function logout(r){
     });
 }
 
-function askForStatement(){
-    console.log('asking for the statement');
+function askForEmployeeList(){
+    console.log('asking for the employee list under the command of the porson');
+    //TODO
+    //var d={
+    //    task:'statement',
+    //    personalId:'10101002'
+    //};
+    //mainAjax(d,showStatement);
+}
 
-    var d={
-        task:'statement',
-        personalId:'10101002'
-    };
-    mainAjax(d,showStatement);
+function askForOfficeList(){
+    console.log('asking for the list of all offices');
+
+    //TODO
+    //var d={
+    //    task:'statement',
+    //    personalId:'10101002'
+    //};
+    //mainAjax(d,showStatement);
+}
+
+function askForPostList(){
+    console.log('asking for the post of all posts');
+
+    //TODO
+    //var d={
+    //    task:'statement',
+    //    personalId:'10101002'
+    //};
+    //mainAjax(d,showStatement);
+}
+
+function askForEditBaseTable(){
+    console.log('asking for editing the base table');
+
+    //TODO
+    //var d={
+    //    task:'statement',
+    //    personalId:'10101002'
+    //};
+    //mainAjax(d,showStatement);
+}
+
+function askForEditContract(){
+    console.log('asking for promoting or concluding contract');
+
+    //TODO
+    //var d={
+    //    task:'statement',
+    //    personalId:'10101002'
+    //};
+    //mainAjax(d,showStatement);
+}
+
+function askForDeleteEmployee(){
+    console.log('asking for deleting the employee');
+
+    //TODO
+    //var d={
+    //    task:'statement',
+    //    personalId:'10101002'
+    //};
+    //mainAjax(d,showStatement);
+}
+
+function askForEditOfficeUnit(){
+    console.log('asking for add or update of the office unit');
+
+    //TODO
+    //var d={
+    //    task:'statement',
+    //    personalId:'10101002'
+    //};
+    //mainAjax(d,showStatement);
+}
+
+function askForEditPost(){
+    console.log('asking for add or edit post');
+
+    //TODO
+    //var d={
+    //    task:'statement',
+    //    personalId:'10101002'
+    //};
+    //mainAjax(d,showStatement);
+}
+
+function askForEditScore(){
+    console.log('asking for editing the score');
+
+    //TODO
+    //var d={
+    //    task:'statement',
+    //    personalId:'10101002'
+    //};
+    //mainAjax(d,showStatement);
+}
+
+function askForBaseTable(){
+    console.log('asking for showing the base table');
+
+    //TODO
+    //var d={
+    //    task:'statement',
+    //    personalId:'10101002'
+    //};
+    //mainAjax(d,showStatement);
 }
 
 function askForPersonalInfo(){
@@ -66,6 +165,29 @@ function askForSalaries(){
     mainAjax(d,showSalaries);
 }
 
+function showEmployeeList(){
+    //TODO there should be iteration here over all the employees
+}
+
+function showOffices(){
+    //TODO there should be iteration here over all the offices
+}
+
+function showEditContract(){
+    //TODO there should be iteration here over all the posts
+}
+
+function showEditEmployee(){
+    //TODO there should be iteration here over all the posts
+}
+
+function showEditOffice(){
+    //TODO there should be iteration here over all the posts
+}
+
+function showEditPosts(){
+    //TODO there should be iteration here over all the posts
+}
 function showSalaries(r){
     $('div.show-salary').show();
     $('div.main').hide();

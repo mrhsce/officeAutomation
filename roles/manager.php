@@ -28,11 +28,11 @@ else{
     <button class="show-salaries" type="button" >Show salaries</button>
 
     <hr>
-    <h4>human resource panel</h4>
-    <!-- List all the employees -->
+    <h4>manager panel</h4>
+    <!-- List all the employees under command -->
     <button class="show-employeeList" type="button" >List all the employees</button>
     <!-- Showing posts -->
-    <button class="show-posts" type="button" >Show Posts</button>
+    <button class="show-posts under command" type="button" >Show Posts</button>
     <hr>
 
     <button class="logout" type="button">Log out</button>
@@ -46,7 +46,6 @@ else{
 <div class="show-posts" style="display: none;">
 
 </div>
-
 
 <div class="show-statement" style="display: none;">
     <span>Personal Id</span>
