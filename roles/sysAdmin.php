@@ -28,7 +28,7 @@ else{
     <button class="show-salaries" type="button" >Show salaries</button>
 
     <hr>
-    <h4>sys sdmin panel</h4>
+    <h4>sys admin panel</h4>
     <!-- List all system users -->
     <button class="show-userList" type="button" >Show users</button>
     <!-- Showing tables -->

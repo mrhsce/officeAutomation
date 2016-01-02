@@ -27,7 +27,7 @@ $(document).ready(function(){
     $('button.logout').on('click',logout);
 });
 
-function logout(r){
+function logout(){
     var d={
         task:'logout'
     };
