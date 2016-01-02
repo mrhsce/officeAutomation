@@ -58,6 +58,7 @@ elseif(isset($_POST['username']) && isset($_POST['password'])){
         $tempAry=array('username'=>$row['Username'],'role'=>$row['Role'],'personalId'=>$row['PersonalID'],
             'firstName'=>$row2['firstName'],'lastName'=>$row2['lastName'],'gender'=>$row2['Gender']);
         $_SESSION['login'] = $tempAry;
+        header('location: ');
 
 //        print_r($_SESSION);
     }
@@ -69,15 +70,6 @@ elseif(isset($_POST['username']) && isset($_POST['password'])){
 }
 elseif (isset($_GET['invalid'])){
     ?>
-    <html>
-
-    <head>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/main.css" rel="stylesheet">
-
-        <script type="application/javascript" src="js/jquery-2.1.4.js"></script>
-        <script type="application/javascript" src="js/main.js"></script>
-    </head>
     <body>
 
     <div class="container sign-in-container">
@@ -101,15 +93,7 @@ elseif (isset($_GET['invalid'])){
 }
 else{
 ?>
-<html>
 
-<head>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
-
-    <script type="application/javascript" src="js/jquery-2.1.4.js"></script>
-    <script type="application/javascript" src="js/main.js"></script>
-</head>
 <body>
 
     <div class="container sign-in-container">

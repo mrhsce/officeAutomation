@@ -9,6 +9,21 @@
 ini_set('display_errors','Off');
 session_start();
 //print_r($_SESSION);
+
+?>
+
+<html>
+
+<head>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+
+    <script type="application/javascript" src="js/jquery-2.1.4.js"></script>
+    <script type="application/javascript" src="js/main.js"></script>
+</head>
+
+
+<?php
 include_once 'login.php';
 //print_r(session_save_path());
 //ini_set();
