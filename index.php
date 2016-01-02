@@ -9,9 +9,9 @@
 //echo'session is:';
 session_start();
 //print_r($_SESSION);
-
 include_once 'login.php';
-
+//print_r(session_save_path());
+ini_set();
 if($_SESSION['login']){
     switch($_SESSION['login']['role']){
         case 'contEmp':
