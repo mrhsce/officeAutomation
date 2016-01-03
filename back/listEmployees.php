@@ -9,11 +9,17 @@ $conn = dbConnect();
 if($conn){
     $query = "";
     //TODO return the list of all the employee under the command of the boss
-    //$query = "SELECT *  FROM  getSalaries('". $inputData['personalId']. "')";
+    $query = "SELECT *  FROM  getAllEmployeeList()";
     $result = sqlsrv_query( $conn , $query);
-    $row = sqlsrv_fetch_array($result);
+    $rows = array();
 
-    echo json_encode($row);
+    for($i = 0; ; $i++ ){
+        $temp = sqlsrv_fetch_array($result);
+        if($temp == '') break;
+        $rows[$i] = $temp;
+    }
+
+    echo json_encode($rows);
 }
 else{
     echo json_encode('sqlConnectionError');

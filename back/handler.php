@@ -18,6 +18,9 @@ switch($inputData['task']){
     case 'personalInfo':
         include_once 'personalInfo.php';
         break;
+    case 'allList':
+        include_once 'listEmployees.php';
+        break;
     case 'salaries':
         include_once 'salaries.php';
         break;        

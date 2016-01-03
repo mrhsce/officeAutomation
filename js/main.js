@@ -29,18 +29,81 @@ $('div.ceo-pId-main').ready(function(){
 
 $('div.salary-main').ready(askForSalaries);
 
+$('div.all-employee-table-container').ready(askAllEmployeeList);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function exportIt(){
     window.print();
 }
 
-function askForEmployeeList(){
-    console.log('asking for the employee list under the command of the porson');
+function askAllEmployeeList(){
+    //console.log('asking for the employee list under the command of the porson');
     //TODO
-    //var d={
-    //    task:'statement',
-    //    personalId:'10101002'
-    //};
-    //mainAjax(d,showStatement);
+    var d={
+        task:'allList'
+    };
+    mainAjax(d,fillTable);
+}
+
+function fillTable(r){
+    console.log('array received for filling the table');
+    console.log(r);
+
+    var n = r.length;
+
+    var post;
+
+    var rows = '';
+    var row = '';
+    for(var i = 0; i<n ; i++){
+        if (r[i]['post'] == null) post = 'None';
+        else post = r[i]['post'];
+
+        row = '<tr>' +
+            '<td>'+
+            r[i]['firstName']+
+            '</td><td>' +
+            r[i]['lastName']+
+            '</td><td>' +
+            r[i]['gender']+
+            '</td><td>' +
+            r[i]['nationalId']+
+            '</td><td>' +
+            r[i]['personalId']+
+            '</td><td>' +
+            r[i]['contractType']+
+            '</td><td>' +
+            post+
+            '</td><td>' +
+            r[i]['officeUnit']+
+            '</td><td>' +
+            r[i]['eduLevel']+
+            '</td></tr>';
+        rows += row;
+    }
+
+    $('div.all-employee-table-container table tbody').html(rows);
+
 }
 
 function askForOfficeList(){

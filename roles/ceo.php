@@ -54,14 +54,30 @@ else{
 </nav>
 
 <?php if(!!isset($_GET['managerPanel'])){ ?>
-    <!-- List all the employees -->
-    <button class="show-employeeList" type="button" >List all the employees</button>
-    <!-- Showing offices -->
-    <button class="show-offices" type="button" >Show offices</button>
-    <!-- Showing posts -->
-    <button class="show-posts" type="button" >Show Posts</button>
-    <!-- Showing basic tables -->
-    <button class="show-basicTables" type="button" >Show Basic tables</button>
+
+    <div class="container all-employee-table-container table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>National ID</th>
+                <th>Personal ID</th>
+                <th>Contract Type</th>
+                <th>Post</th>
+                <th>Office Unit</th>
+                <th>Education Level</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+
+        </table>
+    </div>
+
+
 
 <?php } elseif(!!isset($_GET['pId'])){ ?>
     <div class="container pId-main">
