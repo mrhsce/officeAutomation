@@ -197,6 +197,29 @@ function showEditPosts(){
     //TODO there should be iteration here over all the posts
 }
 function showSalaries(r){
+    var mScore = Number(r['mScore']) || 0;
+    var pScore = Number(r['pScore']) || 0;
+    var base = Number(r['base']) || 0;
+    var adding = Number(r['adding']) || 0;
+    var additional = Number(r['additional']) || 0;
+    var badClimate = Number(r['badClimate']) || 0;
+    var hardness = Number(r['hardness']) || 0;
+    var familyScore = Number(r['familyScore']) || 0;
+    var children = Number(r['children']) || 0;
+    var years = Number(r['years']) || 0;
+    var length = Number(r['length']) || 0;
+    var cNumber = Number(r['childrenNumber']) || 0;
+    var sum = mScore + pScore + base + adding + additional + badClimate + hardness;
+    if(r['maritalStatus']=='S')  familyScore = 0;
+
+    if(cNumber>3) children = 3 * children;
+    else children = cNumber * children;
+
+    years =  parseInt(length / 12) * years;
+
+    sum += children + familyScore + years;
+    sum *= 900;
+
 
     $('div.salary-main div.for-mScore').html(r['mScore']);
     $('div.salary-main div.for-pScore').html(r['pScore']);
@@ -205,10 +228,10 @@ function showSalaries(r){
     $('div.salary-main div.for-additional').html(r['additional']);
     $('div.salary-main div.for-badClimate').html(r['badClimate']);
     $('div.salary-main div.for-hardness').html(r['hardness']);
-    $('div.salary-main div.for-familyScore').html(r['familyScore']);
-    $('div.salary-main div.for-children').html(r['children']);
-    $('div.salary-main div.for-years').html(r['years']);
-    $('div.salary-main div.for-sum').html(r['sum']);
+    $('div.salary-main div.for-familyScore').html(familyScore);
+    $('div.salary-main div.for-children').html(children);
+    $('div.salary-main div.for-years').html(years);
+    $('div.salary-main div.for-sum').html(sum);
 }
 
 function showPersonalInfo(r){

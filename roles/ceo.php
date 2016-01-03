@@ -297,6 +297,7 @@ else{
 
             </div>
         </div>
+        <hr>
         <div class="row">
             <div class="col col-lg-6 right-align">
                 Sum
