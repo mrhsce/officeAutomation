@@ -9,7 +9,7 @@ $(document).ready(function(){
     $('a.logout-link').on('click',logout);
 
     //export
-    $('')
+    $('a.export-btn').on('click',exportIt);
 });
 
 function logout(){
@@ -29,7 +29,9 @@ $('div.ceo-pId-main').ready(function(){
 
 $('div.salary-main').ready(askForSalaries);
 
-
+function exportIt(){
+    window.print();
+}
 
 function askForEmployeeList(){
     console.log('asking for the employee list under the command of the porson');
