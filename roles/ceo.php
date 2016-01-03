@@ -54,6 +54,259 @@ else{
     <button class="show-posts" type="button" >Show Posts</button>
     <!-- Showing basic tables -->
     <button class="show-basicTables" type="button" >Show Basic tables</button>
+
+<?php } elseif(!!isset($_GET['pId'])){ ?>
+    <div class="container pId-main">
+        <div class="container col col-lg-6">
+            <div class="row center-align"> Personal Information</div>
+            <hr>
+            <div class="row">
+                <div class="col col-lg-6 right-align">
+                    Name
+                </div>
+                <div class="col col-lg-6 for-firstName">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6 right-align">
+                    Family
+                </div>
+                <div class="col col-lg-6 for-lastName">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6 right-align">
+                    Gender
+                </div>
+                <div class="col col-lg-6 for-gender">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6 right-align">
+                    Birth Date
+                </div>
+                <div class="col col-lg-6 for-birthDate">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6 right-align">
+                    Born Place
+                </div>
+                <div class="col col-lg-6 for-bornPlace">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6 right-align">
+                    National ID
+                </div>
+                <div class="col col-lg-6 for-nationalId">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6 right-align">
+                    Marital Status
+                </div>
+                <div class="col col-lg-6 for-maritalStatus">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6 right-align">
+                    Children Number
+                </div>
+                <div class="col col-lg-6 for-childrenNumber">
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="container col col-lg-6">
+            <div class="row center-align"> Education Information</div>
+            <hr>
+            <div class="row">
+                <div class="col col-lg-6 right-align">
+                    Education Level
+                </div>
+                <div class="col col-lg-6 for-eduLevel">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6 right-align">
+                    Field
+                </div>
+                <div class="col col-lg-6 for-field">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6 right-align">
+                    Institute
+                </div>
+                <div class="col col-lg-6 for-institute">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6 right-align">
+                    Graduation Date
+                </div>
+                <div class="col col-lg-6 for-graduationDate">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6 right-align">
+                    Final Project Title
+                </div>
+                <div class="col col-lg-6 for-finalProjectTitle">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-6 right-align">
+                    Average
+                </div>
+                <div class="col col-lg-6 for-average">
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+<?php } elseif(!!isset($_GET['salary'])){ ?>
+    <div class="container salary-main">
+        <div class="row center-align">
+            <?php if($_SESSION['login']['gender'] == "M") echo "Mr "; else echo "Ms";
+            ?> <?php echo "".$_SESSION['login']['firstName']." ".$_SESSION['login']['lastName'] ?>
+        </div>
+
+        <div class="row">
+            <div class="col col-lg-6 right-align">
+                Personal ID
+            </div>
+            <div class="col col-lg-6">
+                <?php echo $_SESSION['login']['personalId'] ?>
+            </div>
+        </div>
+        <br>
+        <div class="row center-align"> Salary Information</div>
+        <hr>
+
+
+        <div class="row">
+            <div class="col col-lg-6 right-align">
+                Base Salary
+            </div>
+            <div class="col col-lg-6 for-base">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-6 right-align">
+                Management Score
+            </div>
+            <div class="col col-lg-6 for-mScore">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-6 right-align">
+                Post Score
+            </div>
+            <div class="col col-lg-6 for-pScore">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-6 right-align">
+                Adding
+            </div>
+            <div class="col col-lg-6 for-adding">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-6 right-align">
+                Additional
+            </div>
+            <div class="col col-lg-6 for-additional">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-6 right-align">
+                Bad Climate
+            </div>
+            <div class="col col-lg-6 for-badClimate">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-6 right-align">
+                Hardness
+            </div>
+            <div class="col col-lg-6 for-hardness">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-6 right-align">
+                Family Score
+            </div>
+            <div class="col col-lg-6 for-familyScore">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-6 right-align">
+                Children
+            </div>
+            <div class="col col-lg-6 for-children">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-6 right-align">
+                Years
+            </div>
+            <div class="col col-lg-6 for-years">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-6 right-align">
+                Sum
+            </div>
+            <div class="col col-lg-6 for-sum">
+
+            </div>
+        </div>
+    </div>
+
 <?php } else{ ?>
 
     <div class="container ceo-home-main">
@@ -69,7 +322,7 @@ else{
             </div>
             <div class="row">
                 <!-- Showing personal info -->
-                <button class="show-personalInfo" type="button" >Show personal info</button>
+                <button class="show-personalInfo" type="button" > <a href="?pId">Show personal info</a> </button>
             </div>
 
         </div>
@@ -85,7 +338,9 @@ else{
             </div>
             <div class="row">
                 <!-- Showing salaries -->
-                <button class="show-salaries" type="button" >Show salaries</button>
+                <button class="show-salaries" type="button" >
+                <a href="?salary">Show salaries</a>
+                </button>
             </div>
         </div>
 
@@ -94,7 +349,7 @@ else{
         <div class="container statement-brief">
             <div class="row">
                 <!-- Showing statement -->
-                <button class="show-statement" type="button" >Show the statement</button>
+                <button class="show-statement" type="button" ><a href="?statement">Show the statement</a></button>
             </div>
         </div>
 

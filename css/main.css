@@ -7,6 +7,9 @@ div.sign-in-container p.invalid-text{
     color:red;
 }
 
+hr{
+    border-top: 1px solid #bebebe;
+}
 
 
 
@@ -22,3 +25,30 @@ div.ceo-home-main{
 div.ceo-home-main div{
     width:initial;
 }
+
+
+div.pId-main{
+    border: 2px solid lavender;
+    padding: 3em;
+    background: aliceblue;
+    border-radius: 2em;
+}
+
+.right-align{
+    text-align: right;
+}
+.center-align{
+    text-align: center;
+}
+
+
+
+
+div.salary-main{
+    border: 2px solid lavender;
+    padding: 3em;
+    background: aliceblue;
+    border-radius: 2em;
+    max-width: 30em;
+}
+
