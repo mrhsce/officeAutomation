@@ -5,26 +5,11 @@
 
 
 $(document).ready(function(){
-    //$('form.login-form button.submit-button').on('click',submit);
-
-
-    //statement
-    $('button.show-statement').on('click',function(){
-        askForStatement();
-    });
-
-    //personalInfo
-    $('button.show-personalInfo').on('click',function(){
-        askForPersonalInfo();
-    });
-
-    //showSalaries
-    $('button.show-salaries').on('click',function(){
-        askForSalaries();
-    });
-
     //logout
-    $('button.logout').on('click',logout);
+    $('a.logout-link').on('click',logout);
+
+    //export
+    $('')
 });
 
 function logout(){
@@ -32,9 +17,11 @@ function logout(){
         task:'logout'
     };
     mainAjax(d,function(){
-        window.location.href="/index.php";
+        window.location.href="index.php";
     });
 }
+
+
 
 $('div.ceo-pId-main').ready(function(){
     askForPersonalInfo();
