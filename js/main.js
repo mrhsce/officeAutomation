@@ -267,20 +267,21 @@ function askForBaseTable(){
 
 function askForPersonalInfo(){
     console.log('asking for personal information');
-
+    console.log('asking for salary information');
+    var pId  = $('div.contract-brief span.pId-number').html();
     var d={
         task:'personalInfo',
-        personalId:'10101002'
+        personalId: pId
     };
     mainAjax(d,showPersonalInfo);
 }
 
 function askForSalaries(){
     console.log('asking for salary information');
-
+    var pId  = $('div.contract-brief span.pId-number').html();
     var d={
         task:'salaries',
-        personalId:'10101002'
+        personalId: pId
     };
     mainAjax(d,showSalaries);
 }
