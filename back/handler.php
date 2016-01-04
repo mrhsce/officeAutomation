@@ -15,15 +15,23 @@ switch($inputData['task']){
     case 'statement':
         include_once 'statement.php';
         break;
+
     case 'personalInfo':
         include_once 'personalInfo.php';
         break;
+
     case 'allList':
         include_once 'listEmployees.php';
         break;
+
     case 'salaries':
         include_once 'salaries.php';
-        break;        
+        break;
+
+    case 'register':
+        include_once 'register.php';
+        break;
+
     case 'logout':
         session_destroy();
         echo json_encode('1');

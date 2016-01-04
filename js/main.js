@@ -10,6 +10,10 @@ $(document).ready(function(){
 
     //export
     $('a.export-btn').on('click',exportIt);
+
+
+    $('form.add-employee-form button.submit-add-employee-form').on('click',askRegister);
+
 });
 
 function logout(){
@@ -44,13 +48,69 @@ $('div.all-employee-table-container').ready(askAllEmployeeList);
 
 
 
+function askRegister(){
+    var d = {
+        task: 'register',
+        firstName: $('form.add-employee-form #firstName').val(),
+        lastName: $('form.add-employee-form #lastName').val(),
+        gender: $('form.add-employee-form #gender').val(),
+        nationalId: $('form.add-employee-form #nationalId').val(),
+        birthDate: $('form.add-employee-form #birthDate').val(),
+        sodoorPlace: $('form.add-employee-form #sodoorPlace').val(),
+        maritalStatus: $('form.add-employee-form #maritalStatus').val(),
+        childrenNumber: $('form.add-employee-form #childrenNumber').val(),
+        eduLevel: $('form.add-employee-form #eduLevel').val(),
+        field: $('form.add-employee-form #field').val(),
+        institute: $('form.add-employee-form #institute').val(),
+        graduationDate: $('form.add-employee-form #graduationDate').val(),
+        projectTitle: $('form.add-employee-form #projectTitle').val(),
+        average: $('form.add-employee-form #average').val(),
+        contractId: $('form.add-employee-form #contractId').val(),
+        personalId: $('form.add-employee-form #personalId').val(),
+        startDate: $('form.add-employee-form #startDate').val(),
+        expireDate: $('form.add-employee-form #expireDate').val(),
+        postId: $('form.add-employee-form #postId').val(),
+        officeId: $('form.add-employee-form #officeId').val(),
+        managerId: $('form.add-employee-form #managerId').val(),
+        contractType: $('form.add-employee-form #contractType').val(),
+        username: $('form.add-employee-form #username').val(),
+        pass: $('form.add-employee-form #pass').val(),
+        role: $('form.add-employee-form #role').val()
+    };
 
+    console.log('asked for registering this:');
+    console.log(d);
 
+    mainAjax(d,registerAns);
 
+}
 
-
-
-
+function registerAns(r){
+    if(r[0]==1){
+        alert('Successful')
+    }
+    else if(r[0]==0){
+        alert('Problem In Personal Information')
+    }
+    else if(r[0]==2){
+        alert('Problem In Contract Information')
+    }
+    else if(r[0]==3){
+        alert('Problem In Education Information')
+    }
+    else if(r[0]==4){
+        alert('Problem In Employee Information')
+    }
+    else if(r[0]==5){
+        alert('Problem In User Information')
+    }
+    else if(r[0]==6){
+        alert('Failure')
+    }
+    else{
+        alert('Failure')
+    }
+}
 
 function exportIt(){
     window.print();
