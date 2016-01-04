@@ -42,7 +42,7 @@ else{
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a style="color:cornflowerblue">
-                            Welcome <?php if($_SESSION['login']['gender'] == "M") echo "Mr "; else echo "Ms";
+                            Welcome <?php if($_SESSION['login']['gender'] == "M") echo "Mr "; else echo "Mrs";
                             ?> <?php echo "".$_SESSION['login']['firstName']." ".$_SESSION['login']['lastName'] ?>
                         </a>
                     </li>
@@ -224,7 +224,7 @@ else{
     <?php } elseif(!!isset($_GET['salary'])){ ?>
         <div class="container salary-main">
             <div class="row center-align">
-                <?php if($_SESSION['login']['gender'] == "M") echo "Mr "; else echo "Ms";
+                <?php if($_SESSION['login']['gender'] == "M") echo "Mr "; else echo "Mrs";
                 ?> <?php echo "".$_SESSION['login']['firstName']." ".$_SESSION['login']['lastName'] ?>
             </div>
 
@@ -835,11 +835,12 @@ else{
 
             <div class="container contract-brief">
                 <div class="row pid">
-                    PersonalId: <?php echo $_SESSION['login']['personalId'] ?>
+                    PersonalId:
+                    <span class="pId-number"><?php echo $_SESSION['login']['personalId'] ?></span>
                 </div>
-                <div class="row sum-salary">
-                    Salary:
-                </div>
+<!--                <div class="row sum-salary">-->
+<!--                    Salary:-->
+<!--                </div>-->
                 <div class="row">
                     <!-- Showing salaries -->
                     <button class="show-salaries" type="button" >
