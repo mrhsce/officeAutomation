@@ -8,7 +8,7 @@
 $conn = dbConnect();
 if($conn){
     $query = "";
-    $query = "SELECT *  FROM  getPersonalInfo('". $inputData['personalId']. "')";
+    $query = "SELECT *  FROM  getPersonalInfo('". $_SESSION['login']['personalId']. "')";
     $result = sqlsrv_query( $conn , $query);
     $row = sqlsrv_fetch_array($result);
 
