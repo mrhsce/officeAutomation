@@ -14,6 +14,8 @@ $(document).ready(function(){
 
     $('form.add-employee-form button.submit-add-employee-form').on('click',askRegister);
 
+
+    //TODO implement on click here
 });
 
 function logout(){
@@ -138,7 +140,7 @@ function fillTable(r){
     for(var i = 0; i<n ; i++){
         if (r[i]['post'] == null) post = 'None';
         else post = r[i]['post'];
-
+        //TODO add glyph icon to the end of each row
         row = '<tr>' +
             '<td>'+
             r[i]['firstName']+
